@@ -2,11 +2,16 @@
 
 ## Getting Started
 
-```sh
+```powershell
 pip install -r requirements.txt
+
+python create_database.py
+# https://www.sqlite.org/download.html => sqlite-tools-*
+sqlite3 .\instance\db.sqlite
+$ .tables
 ```
 
-```sh
+```powershell
 flask --app project run --debug
 
 # https://stackoverflow.com/questions/1420719/powershell-setting-an-environment-variable-for-a-single-command-only

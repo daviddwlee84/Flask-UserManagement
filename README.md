@@ -6,6 +6,12 @@
 pip install -r requirements.txt
 ```
 
+```sh
+flask --app project run
+
+# https://stackoverflow.com/questions/1420719/powershell-setting-an-environment-variable-for-a-single-command-only
+```
+
 ## Resources
 
 Tutorial

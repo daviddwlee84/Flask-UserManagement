@@ -42,3 +42,7 @@ CSS Framework
 
 - [Bulma: Free, open source, and modern CSS framework based on Flexbox](https://bulma.io/)
   - [jgthms/bulma: Modern CSS framework based on Flexbox](https://github.com/jgthms/bulma)
+
+Others
+
+- [Werkzeug — Werkzeug Documentation (2.3.x)](https://werkzeug.palletsprojects.com/en/2.3.x/)

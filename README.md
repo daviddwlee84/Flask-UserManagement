@@ -21,7 +21,7 @@ flask --app project run --debug
 
 Tutorial
 
-- [How To Add Authentication to Your App with Flask-Login | DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-add-authentication-to-your-app-with-flask-login)
+- [**How To Add Authentication to Your App with Flask-Login | DigitalOcean**](https://www.digitalocean.com/community/tutorials/how-to-add-authentication-to-your-app-with-flask-login)
 
 Flask
 

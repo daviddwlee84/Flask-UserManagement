@@ -2,3 +2,6 @@ flask
 flask-sqlalchemy
 flask-login
 Flask-Migrate
+# For PostgreSQL
+psycopg2-binary
+python-dotenv

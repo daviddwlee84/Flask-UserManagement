@@ -2,14 +2,16 @@
 
 ## Getting Started
 
+### Local Machine
+
 ```powershell
 pip install -r requirements.txt
 ```
 
-- Set PostgreSQL password in `db.env`
+- Set PostgreSQL username & password in `db.env`
+- Start PostgreSQL server
 
 ```powershell
-# NOTE: currently still using sqlite
 flask --app project db init
 flask --app project db migrate
 flask --app project db upgrade
@@ -18,22 +20,22 @@ flask --app project db upgrade
 > ```powershell
 > python create_database.py
 > ```
-
-```powershell
-# https://www.sqlite.org/download.html => sqlite-tools-*
-sqlite3 .\instance\db.sqlite
-sqlite> .tables
-user
-sqlite> .schema user
-CREATE TABLE user (
-        id INTEGER NOT NULL,
-        email VARCHAR(100),
-        password VARCHAR(100),
-        name VARCHAR(1000),
-        PRIMARY KEY (id),
-        UNIQUE (email)
-);
-```
+>
+> ```powershell
+> # https://www.sqlite.org/download.html => sqlite-tools-*
+> sqlite3 .\instance\db.sqlite
+> sqlite> .tables
+> user
+> sqlite> .schema user
+> CREATE TABLE user (
+>         id INTEGER NOT NULL,
+>         email VARCHAR(100),
+>         password VARCHAR(100),
+>         name VARCHAR(1000),
+>         PRIMARY KEY (id),
+>         UNIQUE (email)
+> );
+> ```
 
 ```powershell
 flask --app project run --debug
@@ -50,6 +52,28 @@ flask --app project db upgrade
 
 This will create new `migrations/version` and automatically upgrade your database
 
+### Docker Compose
+
+```powershell
+docker compose up --build
+```
+
+Initialize PostgreSQL
+
+```powershell
+$ docker exec -it flask-usermanagement-app-1 /bin/sh
+flask --app project db init
+flask --app project db migrate
+flask --app project db upgrade
+```
+
+- Adminer: http://localhost:8080/
+  - System: `PostgreSQL`
+  - Server: `pgsql`
+  - Username: `postgres`
+  - Password: `example`
+- App: http://localhost:5000/
+
 ## Database
 
 - [Flask-UserManagement | DrawSQL](https://drawsql.app/teams/trader/diagrams/flask-usermanagement)
@@ -57,12 +81,12 @@ This will create new `migrations/version` and automatically upgrade your databas
 ## Todo
 
 - [X] Dockerize
-- [ ] PostgreSQL
-  - [Using SQLAlchemy with Flask and PostgreSQL](https://stackabuse.com/using-sqlalchemy-with-flask-and-postgresql/)
+- [X] PostgreSQL
+  - [**Using SQLAlchemy with Flask and PostgreSQL**](https://stackabuse.com/using-sqlalchemy-with-flask-and-postgresql/)
     - [ro6ley/cars_in_a_flask: A simple API built using Flask and SQLAlchemy.](https://github.com/ro6ley/cars_in_a_flask)
   - [docker-library/postgres: Docker Official Image packaging for Postgres](https://github.com/docker-library/postgres)
   - [Container Password](https://github.com/docker-library/postgres/issues/111#issuecomment-293053904)
-  - [flask + postgres + sqlalchemy migrations dockerized intro - DEV Community](https://dev.to/yactouat/flask-postgres-sqlalchemy-migrations-dockerized-intro-2f8p)
+  - [**flask + postgres + sqlalchemy migrations dockerized intro - DEV Community**](https://dev.to/yactouat/flask-postgres-sqlalchemy-migrations-dockerized-intro-2f8p)
 - [ ] HTTPS
 - [ ] Replace password plain hash `All plain hashes are deprecated and will not be supported in Werkzeug 3.0.`
 
@@ -111,6 +135,7 @@ CSS Framework
 Docker
 
 - [Ways to set environment variables in Compose | Docker Documentation](https://docs.docker.com/compose/environment-variables/set-environment-variables/)
+- [Services top-level element | Docker Documentation](https://docs.docker.com/compose/compose-file/05-services/#env_file)
 
 Others
 

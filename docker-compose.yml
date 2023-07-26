@@ -9,17 +9,19 @@ services:
       args:
         PORT: 5000
     volumes:
+      # Main code
       - ./project:/app/project
+      # PostgreSQL
+      - ./db.env:/app/db.env
       # sqlite
       - ./instance:/app/instance
+      # Flask-Migrate
       - ./migrations:/app/migrations
     ports:
       - 5000:5000
     restart: on-failure
 
-  # NOTE: currently these two are separated
-
-  db:
+  pgsql:
     image: postgres
     restart: on-failure
     # When both env_file and environment are set for a service, values set by environment have precedence.
@@ -38,9 +40,14 @@ services:
     # https://github.com/nextcloud/docker/issues/385#issuecomment-403379480
     volumes:
       - ./postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
 
   adminer:
     image: adminer
+    # TODO: maybe there are some default environment variable that can set default password etc.
+    # https://github.com/michalhosna/adminer-docker
+    # https://github.com/wodby/adminer
     restart: on-failure
     ports:
       - 8080:8080

@@ -2,9 +2,16 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
+import os
+from dotenv import load_dotenv
+
+curr_dir = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(curr_dir, "../db.env"))
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
+
+USE_SQLITE = False
 
 
 def create_app():
@@ -14,8 +21,14 @@ def create_app():
     """
     app = Flask(__name__)
 
-    app.config["SECRET_KEY"] = "secret-key-goes-here"
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
+    if USE_SQLITE:
+        app.config["SECRET_KEY"] = "secret-key-goes-here"
+        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
+    else:
+        app.config["SECRET_KEY"] = os.getenv("POSTGRES_PASSWORD")
+        app.config[
+            "SQLALCHEMY_DATABASE_URI"
+        ] = f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD')}@pgsql:5432/{os.getenv('POSTGRES_DB')}"
 
     db.init_app(app)
 

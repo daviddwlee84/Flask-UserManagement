@@ -6,7 +6,7 @@
 pip install -r requirements.txt
 ```
 
-- Create and modify password in `secrets/postgress_db_password`
+- Set PostgreSQL password in `db.env`
 
 ```powershell
 # NOTE: currently still using sqlite

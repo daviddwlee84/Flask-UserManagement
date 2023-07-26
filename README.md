@@ -56,12 +56,13 @@ This will create new `migrations/version` and automatically upgrade your databas
 
 ## Todo
 
-- [ ] Dockerize
+- [X] Dockerize
 - [ ] PostgreSQL
   - [Using SQLAlchemy with Flask and PostgreSQL](https://stackabuse.com/using-sqlalchemy-with-flask-and-postgresql/)
     - [ro6ley/cars_in_a_flask: A simple API built using Flask and SQLAlchemy.](https://github.com/ro6ley/cars_in_a_flask)
   - [docker-library/postgres: Docker Official Image packaging for Postgres](https://github.com/docker-library/postgres)
   - [Container Password](https://github.com/docker-library/postgres/issues/111#issuecomment-293053904)
+  - [flask + postgres + sqlalchemy migrations dockerized intro - DEV Community](https://dev.to/yactouat/flask-postgres-sqlalchemy-migrations-dockerized-intro-2f8p)
 - [ ] HTTPS
 - [ ] Replace password plain hash `All plain hashes are deprecated and will not be supported in Werkzeug 3.0.`
 

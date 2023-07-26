@@ -2,9 +2,26 @@ version: '3.1'
 
 services:
 
+  app:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      args:
+        PORT: 5000
+    volumes:
+      - ./project:/app/project
+      # sqlite
+      - ./instance:/app/instance
+      - ./migrations:/app/migrations
+    ports:
+      - 5000:5000
+    restart: on-failure
+
+  # NOTE: currently these two are separated
+
   db:
     image: postgres
-    restart: always
+    restart: on-failure
     # When both env_file and environment are set for a service, values set by environment have precedence.
     environment:
       PGDATA: /var/lib/postgresql/data
@@ -24,7 +41,7 @@ services:
 
   adminer:
     image: adminer
-    restart: always
+    restart: on-failure
     ports:
       - 8080:8080
 

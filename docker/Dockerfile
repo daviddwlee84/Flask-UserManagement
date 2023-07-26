@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/playwright/python:v1.36.0-jammy
+
+WORKDIR /app
+
+ARG PORT=5000
+ENV FLASK_APP "project"
+ENV FLASK_DEBUG "1"
+ENV PORT=${PORT}
+
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+
+CMD python3 -m flask run --host 0.0.0.0 --port ${PORT}

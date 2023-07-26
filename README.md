@@ -4,9 +4,19 @@
 
 ```powershell
 pip install -r requirements.txt
+```
 
-python create_database.py
+```powershell
+flask --app project db init
+flask --app project db migrate
+flask --app project db upgrade
+```
 
+> ```powershell
+> python create_database.py
+> ```
+
+```powershell
 # https://www.sqlite.org/download.html => sqlite-tools-*
 sqlite3 .\instance\db.sqlite
 sqlite> .tables
@@ -28,6 +38,15 @@ flask --app project run --debug
 # https://stackoverflow.com/questions/1420719/powershell-setting-an-environment-variable-for-a-single-command-only
 ```
 
+When you upgrade any of your database schema
+
+```sh
+flask --app project db migrate
+flask --app project db upgrade
+```
+
+This will create new `migrations/version` and automatically upgrade your database
+
 ## Database
 
 - [Flask-UserManagement | DrawSQL](https://drawsql.app/teams/trader/diagrams/flask-usermanagement)
@@ -36,7 +55,10 @@ flask --app project run --debug
 
 - [ ] Dockerize
 - [ ] PostgreSQL
+  - [Using SQLAlchemy with Flask and PostgreSQL](https://stackabuse.com/using-sqlalchemy-with-flask-and-postgresql/)
+    - [ro6ley/cars_in_a_flask: A simple API built using Flask and SQLAlchemy.](https://github.com/ro6ley/cars_in_a_flask)
 - [ ] HTTPS
+- [ ] Replace password plain hash `All plain hashes are deprecated and will not be supported in Werkzeug 3.0.`
 
 ## Resources
 
@@ -53,6 +75,9 @@ Python Database
 - [sqlalchemy/sqlalchemy: The Database Toolkit for Python](https://github.com/sqlalchemy/sqlalchemy)
   - [The Type Hierarchy — SQLAlchemy 2.0 Documentation](https://docs.sqlalchemy.org/en/20/core/type_basics.html#generic-camelcase-types)
 - [pallets-eco/flask-sqlalchemy: Adds SQLAlchemy support to Flask](https://github.com/pallets-eco/flask-sqlalchemy/)
+- [miguelgrinberg/Flask-Migrate: SQLAlchemy database migrations for Flask applications using Alembic](https://github.com/miguelgrinberg/flask-migrate)
+  - [Flask-Migrate — Flask-Migrate documentation](https://flask-migrate.readthedocs.io/en/latest/)
+  - [Welcome to Alembic’s documentation! — Alembic 1.11.1 documentation](https://alembic.sqlalchemy.org/en/latest/)
 
 Database Schema
 
@@ -62,9 +87,13 @@ Database Schema
 
 Database
 
+- PostgreSQL
+  - [PostgreSQL — SQLAlchemy 2.0 Documentation](https://docs.sqlalchemy.org/en/20/dialects/postgresql.html)
+  - [How to Interact with Databases using SQLAlchemy with PostgreSQL - CoderPad](https://coderpad.io/blog/development/sqlalchemy-with-postgresql/)
 - SQLite
   - [SQLite Download Page](https://www.sqlite.org/download.html)
   - [Command Line Shell For SQLite](https://www.sqlite.org/cli.html)
+- [Multiple Databases with Binds — Flask-SQLAlchemy Documentation (2.x)](https://flask-sqlalchemy.palletsprojects.com/en/2.x/binds/)
 
 CSS Framework
 

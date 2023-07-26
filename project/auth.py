@@ -23,6 +23,8 @@ def login_post():
 
     # check if the user actually exists
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
+    # TODO: UserWarning: The 'sha256' password method is deprecated and will be removed in Werkzeug 3.0. Migrate to the 'scrypt' method.
+    # All plain hashes are deprecated and will not be supported in Werkzeug 3.0.
     if not user or not check_password_hash(user.password, password):
         flash("Please check your login details and try again.")
         return redirect(

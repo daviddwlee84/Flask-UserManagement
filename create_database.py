@@ -12,3 +12,8 @@ with create_app().app_context():
 # db.create_all(
 #     app=create_app()
 # )  # pass the create_app result so Flask-SQLAlchemy gets the configuration.
+
+# Seems flask-migrate can replace this script
+# $ flask db init
+# $ flask db migrate
+# $ flask db upgrade

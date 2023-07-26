@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    # When both env_file and environment are set for a service, values set by environment have precedence.
+    environment:
+      PGDATA: /var/lib/postgresql/data
+      # Use external file instead of hardcoded password
+      # https://github.com/docker-library/postgres/issues/111#issuecomment-293053904
+      # POSTGRES_PASSWORD: example
+      # error: both POSTGRES_PASSWORD and POSTGRES_PASSWORD_FILE are set (but are exclusive)
+      # https://github.com/nextcloud/docker/issues/270#issuecomment-396222239
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_db_password
+    secrets:
+      - postgres_db_password
+    # https://github.com/nextcloud/docker/issues/385#issuecomment-403379480
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+secrets:
+  postgres_db_password:
+    # Create and modify password in `secrets/postgress_db_password`
+    file: ./secrets/postgress_db_password

@@ -6,6 +6,10 @@ db = SQLAlchemy()
 
 
 def create_app():
+    """
+    Application Factory
+    https://flask.palletsprojects.com/en/2.3.x/tutorial/factory/
+    """
     app = Flask(__name__)
 
     app.config["SECRET_KEY"] = "secret-key-goes-here"
